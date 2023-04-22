@@ -1,0 +1,85 @@
+body{
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#calculator, #button-groups, #buttons-numbers, #buttons-operation{
+  display:flex;
+  flex-direction: column;
+}
+
+#buttons-function, #buttons-math, .button-row{
+  display: flex;
+}
+
+.button-row, #buttons-operation{
+  gap: 5px;
+}
+
+#calculator{
+  flex:0 1 60%;
+  height: 75%;
+  background-color: azure;
+  padding: 15px;
+  gap: 2px;
+}
+
+#display{
+  flex: 1 0 20%;
+  border: 1px solid black;
+  margin: 0;
+  padding: 0;
+  font-size: 48px;
+  text-align: right;
+}
+
+#button-groups{
+  flex: 4 0 80%;
+}
+
+#buttons-function{
+  flex: 0 0 20%;
+  justify-content: space-evenly;
+}
+
+button{
+  height: 100%;
+  flex: 1 0 10%;
+  border-radius: 5px;
+}
+
+#buttons-math{
+  flex: 1 1 60%;
+}
+
+#buttons-numbers{
+  flex: 7 1 0;
+  gap: 3px;
+}
+
+.button-row{
+  flex: 1 1 33%;
+  align-items: center;
+}
+
+.number-button{
+  height: 95%;
+}
+
+#buttons-operation{
+  flex: 1 1 0%;
+  align-items: center;
+}
+
+.math-op{
+  flex: 1 1 0;
+  width: 95%;
+}
+
+#equals-button{
+  flex: 3 1 0;
+  width: 95%;
+}

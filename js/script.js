@@ -4,7 +4,6 @@ const OPERATORS = ['+','-','*','/'];
 let num1 = '';
 let num2 = '';
 let op = '';
-let secondNum = false;
 
 buttons.forEach((item) => {
   item.addEventListener('click', (e) => {
@@ -81,9 +80,14 @@ function typeToScreen(str){
   //else read into num2
   if (OPERATORS.includes(str) && num1 === ''){
     return;
-  }else if(OPERATORS.includes(str)){
+  }else if(OPERATORS.includes(str) && !secondNum){
     op = str;
     secondNum = true;
+  }else if (OPERATORS.includes(str) && secondNum){
+    evaluate();
+    op = str;
+    secondNum = true;
+    updateDisplay();
   }else if(!secondNum){
     num1 += str;
   }else{

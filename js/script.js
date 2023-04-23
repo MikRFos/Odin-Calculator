@@ -12,6 +12,15 @@ buttons.forEach((item) => {
   });
 });
 
+document.addEventListener('keypress', (e) => {
+  if(e.key === 'Enter' || e.key === '='){
+    evaluate();
+  }
+  if(/[0-9\+\-\,\/\*]/.test(e.key)){
+    typeToScreen(e.key);
+  }
+})
+
 function findCommand(str){
   switch(str){
     case '=':

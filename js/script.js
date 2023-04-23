@@ -1,12 +1,15 @@
 const buttons = document.querySelectorAll('button');
 const screen = document.querySelector('p');
 const OPERATORS = ['+','-','*','/'];
+let num1 = '';
+let num2 = '';
+let op = '';
+let secondNum = false;
 
 buttons.forEach((item) => {
   item.addEventListener('click', (e) => {
     console.log(`Button: ${e.target.textContent} Clicked`)
     findCommand(e.target.textContent);
-    
   });
 });
 
@@ -27,24 +30,70 @@ function findCommand(str){
 }
 
 function evaluate(){
+  let answer;
+  switch(op){
+    case '*':
+      answer = num1 * num2;
+      break;
+    case '/':
+      answer = num1 / num2;
+      break;
+    case '+':
+      answer = +num1 + +num2;
+      break;
+    case '-':
+      answer = num1 - num2;
+      break;
+  }
+  num1 = String(answer);
+  num2 = '';
+  op = '';
+  secondNum = false;
+  updateDisplay();
 }
 
 function backspace(){
-  return screen.textContent = screen.textContent.substring(0, screen.textContent.length-1);
+  if(secondNum && num2 !==''){
+    num2 = num2.slice(0,-1)
+  }else if(op !==''){
+    console.log("here");
+    op='';
+    secondNum = false;
+  }else{
+    num1 = num1.slice(0,-1);
+  }
+  updateDisplay();
 }
 
 function clearScreen(){
-  screen.textContent = '';
+  num1 = '';
+  num2 = '';
+  op = '';
+  secondNum = false;
+  updateDisplay();
 }
 
 function typeToScreen(str){
-  if (screen.textContent.length > 0){
-    if (OPERATORS.includes(str) && OPERATORS.includes(screen.textContent[screen.textContent.length - 1])){
-      console.log(screen.textContent[screen.length-1])
-      screen.textContent = backspace();
-    }
+  //check if num or operator
+  //if operator readinto op
+  //if operator already a thing overwrite it.
+  //if num1 is not null read it into num1
+  //else read into num2
+  if (OPERATORS.includes(str) && num1 === ''){
+    return;
+  }else if(OPERATORS.includes(str)){
+    op = str;
+    secondNum = true;
+  }else if(!secondNum){
+    num1 += str;
+  }else{
+    num2 += str;
   }
-  screen.textContent += str;
+  updateDisplay();
+}
+
+function updateDisplay(){
+  screen.textContent = `${num1} ${op} ${num2}`;
 }
 
 //Press number/operation button -> number appears on screen

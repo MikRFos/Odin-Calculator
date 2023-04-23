@@ -8,7 +8,6 @@ let secondNum = false;
 
 buttons.forEach((item) => {
   item.addEventListener('click', (e) => {
-    console.log(`Button: ${e.target.textContent} Clicked`)
     findCommand(e.target.textContent);
   });
 });
@@ -24,6 +23,8 @@ function findCommand(str){
     case 'C':
       clearScreen();
       break;
+    case '+/-':
+      break;
     default:
       typeToScreen(str);
   }
@@ -31,6 +32,9 @@ function findCommand(str){
 
 function evaluate(){
   let answer;
+  if(num1 === '' || num2 === '' || op === ''){
+    return;
+  }
   switch(op){
     case '*':
       answer = num1 * num2;
@@ -56,7 +60,6 @@ function backspace(){
   if(secondNum && num2 !==''){
     num2 = num2.slice(0,-1)
   }else if(op !==''){
-    console.log("here");
     op='';
     secondNum = false;
   }else{
